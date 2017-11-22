@@ -1,0 +1,17 @@
+C:\Users\brezt\Documents\prueba\consulta nomina\consulta nomina\bin\Debug\consulta nomina.exe.config
+C:\Users\brezt\Documents\prueba\consulta nomina\consulta nomina\bin\Debug\consulta nomina.exe
+C:\Users\brezt\Documents\prueba\consulta nomina\consulta nomina\bin\Debug\consulta nomina.pdb
+C:\Users\brezt\Documents\prueba\consulta nomina\consulta nomina\bin\Debug\EntityFramework.dll
+C:\Users\brezt\Documents\prueba\consulta nomina\consulta nomina\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\brezt\Documents\prueba\consulta nomina\consulta nomina\bin\Debug\System.Data.SQLite.dll
+C:\Users\brezt\Documents\prueba\consulta nomina\consulta nomina\bin\Debug\EntityFramework.xml
+C:\Users\brezt\Documents\prueba\consulta nomina\consulta nomina\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\brezt\Documents\prueba\consulta nomina\consulta nomina\bin\Debug\System.Data.SQLite.xml
+C:\Users\brezt\Documents\prueba\consulta nomina\consulta nomina\obj\Debug\consulta nomina.csprojResolveAssemblyReference.cache
+C:\Users\brezt\Documents\prueba\consulta nomina\consulta nomina\obj\Debug\consulta_nomina.Properties.Resources.resources
+C:\Users\brezt\Documents\prueba\consulta nomina\consulta nomina\obj\Debug\consulta nomina.csproj.GenerateResource.Cache
+C:\Users\brezt\Documents\prueba\consulta nomina\consulta nomina\obj\Debug\consulta nomina.exe
+C:\Users\brezt\Documents\prueba\consulta nomina\consulta nomina\obj\Debug\consulta nomina.pdb
+C:\Users\brezt\Documents\prueba\consulta nomina\consulta nomina\obj\Debug\consulta_nomina.frmbusquedaempleado.resources
+C:\Users\brezt\Documents\prueba\consulta nomina\consulta nomina\obj\Debug\consulta_nomina.frmEmpleado.resources
+C:\Users\brezt\Documents\prueba\consulta nomina\consulta nomina\obj\Debug\consulta_nomina.inicio.resources
