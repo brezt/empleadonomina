@@ -112,7 +112,7 @@ namespace consulta_nomina
 
 
                 Operaciones op = new Operaciones();
-                op.ConsultasSinResultados("insert into empleados(sueldoempleado, idcargo, iddepartmento, idestado,descriempleado, nombreempleado, apellidoempleado, cedulaempleado, sexoempleado, direccionempleado,telefonoempleado,fechanacimiento,fechaingreso)values ('" + txtsueldo.Text + "', 1, 2, 1, '" + txtdescriccion.Text + "', '" + txtnombre.Text + "', '" + txtapellido.Text + "', '" + txtcedula.Text + "', '" + cmbsexo.Text + "', '" + txtdireccion.Text + "','" + txttelefono.Text + "', '" + txtfechanacimiento.Text + "', '" + txtfechaingreso.Text + "')");
+                op.ConsultasSinResultados("insert into empleados(sueldoempleado, idcargo, iddepartmento, idestado,descriempleado, nombreempleado, apellidoempleado, cedulaempleado, sexoempleado, direccionempleado,telefonoempleado,fechanacimiento,fechaingreso)values ('" + txtsueldo.Text + "', '" + txtidcargo.Text + "','" + txtIdDepartamento.Text + "', '" + txtIdEstado.Text + "', '" + txtdescriccion.Text + "', '" + txtnombre.Text + "', '" + txtapellido.Text + "', '" + txtcedula.Text + "', '" + cmbsexo.Text + "', '" + txtdireccion.Text + "','" + txttelefono.Text + "', '" + txtfechanacimiento.Text + "', '" + txtfechaingreso.Text + "')");
                 MessageBox.Show("DATOS GUARDADOS");
                 borrar();
             }
@@ -237,8 +237,12 @@ namespace consulta_nomina
         private void frmEmpleado_Load(object sender, EventArgs e)
         {
             Operaciones op = new Operaciones();
-            
 
+            op.llenarComboBox(cmbcargo, "select descricargo from cargo", "descricargo");
+            op.llenarComboBox(cmbdepartamento, " select descridepartamento from deprtamentos", "descridepartamento");
+            op.llenarComboBox(cmbestado, "  select descriestado from estado", "descriestado");
+
+          
             if (txtid.Text=="")
             {
                 btncrear.Enabled = true;
@@ -280,6 +284,27 @@ namespace consulta_nomina
 
                 Image.FromFile(fileDialog.FileName);
             }
+
+        }
+
+        private void cmbcargo_TextChanged(object sender, EventArgs e)
+        {
+            Operaciones op = new Operaciones();
+           op.llenarTextBox(txtidcargo, "select idcargo from cargo where descricargo=  '" + cmbcargo.Text + "'", "idcargo");
+
+        }
+
+        private void cmbdepartamento_TextChanged(object sender, EventArgs e)
+        {
+            Operaciones op = new Operaciones();
+            op.llenarTextBox(txtIdDepartamento, "select iddepartamento from deprtamentos where descridepartamento= '" + cmbdepartamento.Text + "'", "iddepartamento");
+
+        }
+
+        private void cmbestado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Operaciones op = new Operaciones();
+            op.llenarTextBox(txtIdEstado, " select idestado from estado where descriestado='"+ cmbestado.Text +"'", "idestado");
 
         }
     }

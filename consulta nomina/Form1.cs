@@ -65,7 +65,7 @@ namespace consulta_nomina
         private void Form1_Load(object sender, EventArgs e)
         {
             Operaciones op = new Operaciones();
-            op.Conectar();
+            //op.Conectar();
             
             dgvempleado.DataSource = op.ConsultaConResultado("select * from empleados");
         }

@@ -10,25 +10,78 @@ using System.Windows.Forms;
 
 namespace consulta_nomina
 {
-    public class Operaciones
+    class Operaciones
     {
-        public string Conectar()
+        SQLiteConnection cnn;
+        SQLiteCommand cmd;
+        SQLiteDataReader dr;
+
+        public Operaciones()
         {
-            SQLiteConnection cnx = new SQLiteConnection("Data Source=C:\\sistemas\\NOMINA.DB; Version=3;");
+            cnn = new SQLiteConnection("Data Source=C:\\sistemas\\NOMINA.DB; Version=3;");
             try
             {
-                cnx.Open();
-                return "conexion exitosa";
+                cnn.Open();
+                //return "conexion exitosa";
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                MessageBox.Show(ex.Message);
             }
-            finally
+
+        }
+
+        public void llenarComboBox(ComboBox combo, string query, string nombCampo)//coje como parametro el combobox, el select de la bd y el nombre del campo
+        {
+            try
             {
-                cnx.Clone();
+                cmd = new SQLiteCommand(query, cnn);//  le paso el query( select )de la base de datos y el sqlite command
+                dr = cmd.ExecuteReader();//llenando el datareader con los registros del sqlite command
+
+                while (dr.Read())//ciclo para que lea cada uno de los registros de la base de datos
+                {
+                    combo.Items.Add(dr[nombCampo].ToString());//agregando los items de la base de datos
+                }
+                dr.Close();//cerrando la conexion 
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo cargar nada" + ex.ToString());
             }
         }
+
+
+
+        //funcion  para llenar un textbox
+        public void llenarTextBox(TextBox textbox, string query, string nombCampo)//coje como parametro el textbox, el select de la bd y el nombre del campo
+        {
+            try
+            {
+                cmd = new SQLiteCommand(query, cnn);//  le paso el query( select )de la base de datos y el sqlite command
+                dr = cmd.ExecuteReader();//llenando el datareader con los registros del sqlite command
+
+                if (dr.Read())
+                {
+                    textbox.Text = dr[nombCampo].ToString();//agregando los items de la base de datos
+                }
+                dr.Close();//cerrando la conexion 
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No se pudo cargar nada " + ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// ///////////
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+
+
+
 
         public string ConsultasSinResultados(string sql)
         {
@@ -48,7 +101,6 @@ namespace consulta_nomina
             {
                 cnx.Close();
             }
-
         }
 
 
@@ -66,23 +118,60 @@ namespace consulta_nomina
                 ad = new SQLiteDataAdapter(cmd);
                 ad.Fill(dt);
             }
-
             catch (SQLiteException ex)
             {
-                
-            }
 
-           
-        cnx.Close();
+            }
+            cnx.Close();
             return dt;
         }
-        
 
-        
+        // METODO PARA QUE PERMITA SOLO LETRAS 
+        public void soloLetras(KeyPressEventArgs l)
+        {
+            if (char.IsLetter(l.KeyChar))
+            {
+                l.Handled = false;
+            }
+            else if (char.IsSeparator(l.KeyChar))
+            {
+                l.Handled = false;
 
+            }
+            else if (char.IsControl(l.KeyChar))
+            {
+                l.Handled = false;
 
+            }
+            else
+            {
+                l.Handled = true;
+            }
+        }
+        //METODO PARA QUE PERMITA SOLO NUMEROS
+        public void soloNumeros(KeyPressEventArgs l)
+        {
+            if (char.IsDigit(l.KeyChar))
+            {
+                l.Handled = false;
+            }
+            else if (char.IsSeparator(l.KeyChar))
+            {
+                l.Handled = false;
+            }
+            else if (char.IsControl(l.KeyChar))
+            {
+                l.Handled = false;
 
+            }
+            else if (l.KeyChar.ToString().Equals("."))
+            {
+                l.Handled = false;
+            }
+            else
+            {
+                l.Handled = true;
+            }
+        }
     }
-    
-        
 }
