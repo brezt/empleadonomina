@@ -27,7 +27,7 @@ namespace consulta_nomina
             busqueda();
         }
 
-        public void busqueda() //Fucion para buscar//
+        public void busqueda() //Funcion para buscar//
         {
             Operaciones op = new Operaciones();
             
@@ -95,7 +95,7 @@ namespace consulta_nomina
             emp.cmbdepartamento.Text = rellenar.Cells["iddepartmento"].Value.ToString();
             emp.cmbestado.Text = rellenar.Cells["idestado"].Value.ToString();
             emp.txtdescriccion.Text = rellenar.Cells["descriempleado"].Value.ToString();
-            emp.txtnombre.Text= rellenar.Cells["nombreempleado"].Value.ToString();
+            emp.txtnombre.Text = rellenar.Cells["nombreempleado"].Value.ToString();
             emp.txtapellido.Text = rellenar.Cells["apellidoempleado"].Value.ToString();
             emp.txtcedula.Text = rellenar.Cells["cedulaempleado"].Value.ToString();
             emp.txttelefono.Text = rellenar.Cells["telefonoempleado"].Value.ToString();
@@ -104,8 +104,89 @@ namespace consulta_nomina
             emp.txtfechanacimiento.Text = rellenar.Cells["fechanacimiento"].Value.ToString();
             emp.txtfechaingreso.Text = rellenar.Cells["fechaingreso"].Value.ToString();
             emp.txtid.Text = rellenar.Cells["idempleado"].Value.ToString();
+            emp.txtRuta.Text = rellenar.Cells["foto_empleado"].Value.ToString();
+
+            OpenFileDialog OP = new OpenFileDialog();
+            string f = emp.procesar(rellenar.Cells["foto_empleado"].Value.ToString());
+
+            if (!f.Equals(""))
+            {
+                emp.pictureBox1.Load(f.ToString());
+            }
+
 
             emp.Show();
+        
+
+    }
+
+    private void btnimprimir_Click(object sender, EventArgs e)
+        {
+            Operaciones op = new Operaciones();
+            DataSet ds = new DataSet();
+            
+            
+            if (rbtnid.Checked == true)
+            {
+                DataTable dt =  op.ConsultaConResultado("select * from empleados where idempleado like'%" + txtbuscar.Text.Trim() + "%'");
+                
+                ds.Tables.Add(dt);
+                ds.Tables[0].TableName = "empleados";
+                ds.WriteXml(@"C:\sistemas\nomina.xml");
+
+                frmReporteEmpleado re = new frmReporteEmpleado();
+                re.Show();
+            }
+
+           else  if (rbtnnombre.Checked == true)
+            {
+                DataTable dt = op.ConsultaConResultado("select * from empleados where nombreempleado like'%" + txtbuscar.Text.Trim() + "%'");
+
+                ds.Tables.Add(dt);
+                ds.Tables[0].TableName = "empleados";
+                ds.WriteXml(@"C:\sistemas\xmlNomina\empleadonomina.xml");
+
+                frmReporteEmpleado re = new frmReporteEmpleado();
+                re.Show();
+            }
+
+           else  if (rbtnapellido.Checked == true)
+            {
+                DataTable dt = op.ConsultaConResultado("select * from empleados where apellidoempleado like'%" + txtbuscar.Text.Trim() + "%'");
+                ds.Tables.Add(dt);
+                ds.Tables[0].TableName = "empleados";
+                ds.WriteXml(@"C:\sistemas\xmlNomina\empleadonomina.xml");
+
+                frmReporteEmpleado re = new frmReporteEmpleado();
+                re.Show();
+            }
+
+
+            else if (rbtncedula.Checked == true)
+            {
+                DataTable dt= op.ConsultaConResultado("select * from empleados where cedulaempleado like'%" + txtbuscar.Text.Trim() + "%'");
+                ds.Tables.Add(dt);
+                ds.Tables[0].TableName = "empleados";
+                ds.WriteXml(@"C:\sistemas\xmlNomina\empleadonomina.xml");
+
+                frmReporteEmpleado re = new frmReporteEmpleado();
+                re.Show();
+            }
+
+            else if (txtbuscar.Text.Length == 0)
+            {
+                DataTable dt = op.ConsultaConResultado("select * from empleados");
+                ds.Tables.Add(dt);
+                ds.Tables[0].TableName = "empleados";
+                ds.WriteXml(@"C:\sistemas\xmlNomina\empleadonomina.xml");
+
+                frmReporteEmpleado re = new frmReporteEmpleado();
+                re.Show();
+            }
+
+    
+
+
         }
     }
 }

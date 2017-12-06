@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEmpleado));
             this.frmcrearempleado = new System.Windows.Forms.GroupBox();
+            this.txtRuta = new System.Windows.Forms.TextBox();
             this.txtIdEstado = new System.Windows.Forms.TextBox();
             this.txtIdDepartamento = new System.Windows.Forms.TextBox();
             this.txtidcargo = new System.Windows.Forms.TextBox();
@@ -79,6 +81,7 @@
             // 
             // frmcrearempleado
             // 
+            this.frmcrearempleado.Controls.Add(this.txtRuta);
             this.frmcrearempleado.Controls.Add(this.txtIdEstado);
             this.frmcrearempleado.Controls.Add(this.txtIdDepartamento);
             this.frmcrearempleado.Controls.Add(this.txtidcargo);
@@ -123,6 +126,13 @@
             this.frmcrearempleado.Text = "Datos Generales";
             this.frmcrearempleado.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // txtRuta
+            // 
+            this.txtRuta.Location = new System.Drawing.Point(431, 372);
+            this.txtRuta.Name = "txtRuta";
+            this.txtRuta.Size = new System.Drawing.Size(100, 20);
+            this.txtRuta.TabIndex = 39;
+            // 
             // txtIdEstado
             // 
             this.txtIdEstado.Location = new System.Drawing.Point(344, 408);
@@ -147,19 +157,22 @@
             // btnimagen
             // 
             this.btnimagen.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.btnimagen.Location = new System.Drawing.Point(425, 280);
+            this.btnimagen.Image = ((System.Drawing.Image)(resources.GetObject("btnimagen.Image")));
+            this.btnimagen.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnimagen.Location = new System.Drawing.Point(418, 279);
             this.btnimagen.Margin = new System.Windows.Forms.Padding(2);
             this.btnimagen.Name = "btnimagen";
-            this.btnimagen.Size = new System.Drawing.Size(88, 34);
+            this.btnimagen.Size = new System.Drawing.Size(102, 54);
             this.btnimagen.TabIndex = 35;
-            this.btnimagen.Text = "Buscar imagen";
+            this.btnimagen.Text = "Examinar ";
+            this.btnimagen.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnimagen.UseVisualStyleBackColor = false;
             this.btnimagen.Click += new System.EventHandler(this.btnimagen_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(441, 322);
+            this.label7.Location = new System.Drawing.Point(438, 339);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(15, 13);
@@ -168,12 +181,13 @@
             // 
             // txtid
             // 
-            this.txtid.Location = new System.Drawing.Point(460, 319);
+            this.txtid.Location = new System.Drawing.Point(457, 336);
             this.txtid.Margin = new System.Windows.Forms.Padding(2);
             this.txtid.Name = "txtid";
             this.txtid.ReadOnly = true;
             this.txtid.Size = new System.Drawing.Size(22, 20);
             this.txtid.TabIndex = 33;
+            this.txtid.TextChanged += new System.EventHandler(this.txtid_TextChanged);
             // 
             // txtdescriccion
             // 
@@ -247,7 +261,8 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::consulta_nomina.Properties.Resources.user_icon;
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(364, 54);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
@@ -260,9 +275,6 @@
             // cmbcargo
             // 
             this.cmbcargo.FormattingEnabled = true;
-            this.cmbcargo.Items.AddRange(new object[] {
-            "01-Contabilidad",
-            "02-Transporte"});
             this.cmbcargo.Location = new System.Drawing.Point(103, 335);
             this.cmbcargo.Margin = new System.Windows.Forms.Padding(2);
             this.cmbcargo.Name = "cmbcargo";
@@ -475,23 +487,29 @@
             // 
             // btnantiguedad
             // 
-            this.btnantiguedad.Location = new System.Drawing.Point(327, 68);
+            this.btnantiguedad.Image = ((System.Drawing.Image)(resources.GetObject("btnantiguedad.Image")));
+            this.btnantiguedad.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnantiguedad.Location = new System.Drawing.Point(296, 61);
             this.btnantiguedad.Margin = new System.Windows.Forms.Padding(2);
             this.btnantiguedad.Name = "btnantiguedad";
-            this.btnantiguedad.Size = new System.Drawing.Size(120, 32);
+            this.btnantiguedad.Size = new System.Drawing.Size(152, 41);
             this.btnantiguedad.TabIndex = 3;
             this.btnantiguedad.Text = "Cálcular Antiguedad";
+            this.btnantiguedad.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnantiguedad.UseVisualStyleBackColor = true;
             this.btnantiguedad.Click += new System.EventHandler(this.btnantiguedad_Click);
             // 
             // btnedad
             // 
-            this.btnedad.Location = new System.Drawing.Point(327, 22);
+            this.btnedad.Image = ((System.Drawing.Image)(resources.GetObject("btnedad.Image")));
+            this.btnedad.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnedad.Location = new System.Drawing.Point(296, 20);
             this.btnedad.Margin = new System.Windows.Forms.Padding(2);
             this.btnedad.Name = "btnedad";
-            this.btnedad.Size = new System.Drawing.Size(120, 32);
+            this.btnedad.Size = new System.Drawing.Size(152, 38);
             this.btnedad.TabIndex = 2;
-            this.btnedad.Text = "Calcular Edad";
+            this.btnedad.Text = "Cálcular Edad";
+            this.btnedad.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnedad.UseVisualStyleBackColor = true;
             this.btnedad.Click += new System.EventHandler(this.btnedad_Click);
             // 
@@ -513,44 +531,57 @@
             // 
             // btncrear
             // 
-            this.btncrear.Location = new System.Drawing.Point(11, 592);
+            this.btncrear.Image = ((System.Drawing.Image)(resources.GetObject("btncrear.Image")));
+            this.btncrear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btncrear.Location = new System.Drawing.Point(28, 590);
             this.btncrear.Margin = new System.Windows.Forms.Padding(2);
             this.btncrear.Name = "btncrear";
-            this.btncrear.Size = new System.Drawing.Size(56, 19);
+            this.btncrear.Size = new System.Drawing.Size(107, 39);
             this.btncrear.TabIndex = 2;
             this.btncrear.Text = "Crear";
+            this.btncrear.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btncrear.UseVisualStyleBackColor = true;
             this.btncrear.Click += new System.EventHandler(this.btncrear_Click);
             // 
             // btnguardar
             // 
-            this.btnguardar.Location = new System.Drawing.Point(93, 592);
+            this.btnguardar.Image = ((System.Drawing.Image)(resources.GetObject("btnguardar.Image")));
+            this.btnguardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnguardar.Location = new System.Drawing.Point(140, 590);
             this.btnguardar.Margin = new System.Windows.Forms.Padding(2);
             this.btnguardar.Name = "btnguardar";
-            this.btnguardar.Size = new System.Drawing.Size(56, 19);
+            this.btnguardar.Size = new System.Drawing.Size(119, 39);
             this.btnguardar.TabIndex = 3;
             this.btnguardar.Text = "Guardar";
+            this.btnguardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnguardar.UseVisualStyleBackColor = true;
             this.btnguardar.Click += new System.EventHandler(this.btnguardar_Click);
             // 
             // btnimprimir
             // 
-            this.btnimprimir.Location = new System.Drawing.Point(175, 592);
+            this.btnimprimir.Image = ((System.Drawing.Image)(resources.GetObject("btnimprimir.Image")));
+            this.btnimprimir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnimprimir.Location = new System.Drawing.Point(263, 590);
             this.btnimprimir.Margin = new System.Windows.Forms.Padding(2);
             this.btnimprimir.Name = "btnimprimir";
-            this.btnimprimir.Size = new System.Drawing.Size(56, 19);
+            this.btnimprimir.Size = new System.Drawing.Size(118, 39);
             this.btnimprimir.TabIndex = 4;
             this.btnimprimir.Text = "Imprimir";
+            this.btnimprimir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnimprimir.UseVisualStyleBackColor = true;
+            this.btnimprimir.Click += new System.EventHandler(this.btnimprimir_Click);
             // 
             // btneliminar
             // 
-            this.btneliminar.Location = new System.Drawing.Point(256, 592);
+            this.btneliminar.Image = ((System.Drawing.Image)(resources.GetObject("btneliminar.Image")));
+            this.btneliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btneliminar.Location = new System.Drawing.Point(386, 590);
             this.btneliminar.Margin = new System.Windows.Forms.Padding(2);
             this.btneliminar.Name = "btneliminar";
-            this.btneliminar.Size = new System.Drawing.Size(56, 19);
+            this.btneliminar.Size = new System.Drawing.Size(118, 39);
             this.btneliminar.TabIndex = 5;
             this.btneliminar.Text = "Eliminar";
+            this.btneliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btneliminar.UseVisualStyleBackColor = true;
             this.btneliminar.Click += new System.EventHandler(this.btneliminar_Click);
             // 
@@ -558,7 +589,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 629);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(592, 652);
             this.Controls.Add(this.btneliminar);
             this.Controls.Add(this.btnimprimir);
             this.Controls.Add(this.btnguardar);
@@ -624,5 +656,6 @@
         private System.Windows.Forms.TextBox txtIdEstado;
         private System.Windows.Forms.TextBox txtIdDepartamento;
         private System.Windows.Forms.TextBox txtidcargo;
+        public System.Windows.Forms.TextBox txtRuta;
     }
 }

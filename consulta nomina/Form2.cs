@@ -12,6 +12,8 @@ namespace consulta_nomina
 {
     public partial class frmEmpleado : Form
     {
+        string foto = "";
+
         public frmEmpleado()
         {
             InitializeComponent();
@@ -112,7 +114,7 @@ namespace consulta_nomina
 
 
                 Operaciones op = new Operaciones();
-                op.ConsultasSinResultados("insert into empleados(sueldoempleado, idcargo, iddepartmento, idestado,descriempleado, nombreempleado, apellidoempleado, cedulaempleado, sexoempleado, direccionempleado,telefonoempleado,fechanacimiento,fechaingreso)values ('" + txtsueldo.Text + "', '" + txtidcargo.Text + "','" + txtIdDepartamento.Text + "', '" + txtIdEstado.Text + "', '" + txtdescriccion.Text + "', '" + txtnombre.Text + "', '" + txtapellido.Text + "', '" + txtcedula.Text + "', '" + cmbsexo.Text + "', '" + txtdireccion.Text + "','" + txttelefono.Text + "', '" + txtfechanacimiento.Text + "', '" + txtfechaingreso.Text + "')");
+                op.ConsultasSinResultados("insert into empleados(sueldoempleado, idcargo, iddepartmento, idestado,descriempleado, nombreempleado, apellidoempleado, cedulaempleado, sexoempleado, direccionempleado,telefonoempleado,fechanacimiento,fechaingreso,foto_empleado)values ('" + txtsueldo.Text + "', '" + txtidcargo.Text + "','" + txtIdDepartamento.Text + "', '" + txtIdEstado.Text + "', '" + txtdescriccion.Text + "', '" + txtnombre.Text + "', '" + txtapellido.Text + "', '" + txtcedula.Text + "', '" + cmbsexo.Text + "', '" + txtdireccion.Text + "','" + txttelefono.Text + "', '" + txtfechanacimiento.Text + "', '" + txtfechaingreso.Text + "', '" + txtRuta.Text + "')");
                 MessageBox.Show("DATOS GUARDADOS");
                 borrar();
             }
@@ -130,6 +132,10 @@ namespace consulta_nomina
             txtdescriccion.Clear();
             txtsueldo.Clear();
             cmbsexo.SelectedIndex = -1;
+            cmbcargo.SelectedIndex = -1;
+            cmbdepartamento.SelectedIndex = -1;
+            cmbestado.SelectedIndex = -1;
+
         }
         private Boolean validarcampos()
         {
@@ -231,16 +237,26 @@ namespace consulta_nomina
         {
             if (MessageBox.Show("SEGURO QUE DECEA MODIFICAR ESTE REGISTRO?", "ACTUALIZAR EMPLEADO", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) == DialogResult.Yes) ;
                 Operaciones op = new Operaciones();
-            op.ConsultasSinResultados("UPDATE empleados SET sueldoempleado ='" + txtsueldo.Text + "', idcargo = '" + cmbcargo.Text + "', iddepartmento = '" + cmbdepartamento.Text + "', idestado = '" + cmbestado.Text + "', descriempleado = '" + txtdescriccion.Text + "', nombreempleado = '" + txtnombre.Text + "', apellidoempleado = '" + txtapellido.Text + "', cedulaempleado = '" + txtcedula.Text + "', sexoempleado = '" + cmbsexo.Text +"', direccionempleado = '" + txtdireccion.Text + "', telefonoempleado = '" + txttelefono.Text + "', fechanacimiento = '" + txtfechanacimiento.Text + "', fechaingreso = '" + txtfechaingreso.Text + "'WHERE idempleado = '" + txtid.Text + "' ");
+            op.ConsultasSinResultados("UPDATE empleados SET sueldoempleado ='" + txtsueldo.Text + "', idcargo = '" + cmbcargo.Text + "', iddepartmento = '" + cmbdepartamento.Text + "', idestado = '" + cmbestado.Text + "', descriempleado = '" + txtdescriccion.Text + "', nombreempleado = '" + txtnombre.Text + "', apellidoempleado = '" + txtapellido.Text + "', cedulaempleado = '" + txtcedula.Text + "', sexoempleado = '" + cmbsexo.Text +"', direccionempleado = '" + txtdireccion.Text + "', telefonoempleado = '" + txttelefono.Text + "', fechanacimiento = '" + txtfechanacimiento.Text + "', fechaingreso = '" + txtfechaingreso.Text + "', foto_empleado = '"+txtRuta.Text+"' WHERE idempleado = '" + txtid.Text + "' ");
+         
+               
         }
+
+                         
 
         private void frmEmpleado_Load(object sender, EventArgs e)
         {
             Operaciones op = new Operaciones();
-
+            if (txtid.Text == "")
+            {
+                btnimprimir.Enabled = false;
+                btneliminar.Enabled = false;
+            }
             op.llenarComboBox(cmbcargo, "select descricargo from cargo", "descricargo");
             op.llenarComboBox(cmbdepartamento, " select descridepartamento from deprtamentos", "descridepartamento");
             op.llenarComboBox(cmbestado, "  select descriestado from estado", "descriestado");
+            
+
 
           
             if (txtid.Text=="")
@@ -271,20 +287,35 @@ namespace consulta_nomina
 
         private void btnimagen_Click(object sender, EventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Filter =
+            OpenFileDialog getImage = new OpenFileDialog();
+            getImage.InitialDirectory = "C:\\sistemas";
+            getImage.Filter = "Archivos de Imagen (*.jpg)(*.jpeg)|*.jpg;*.jpeg|PNG (*.png)|*.png|GIF (*.gif)|*.gif";
 
-            "Archivo JPG|*.jpg";
-
-
-            if (fileDialog.ShowDialog() == DialogResult.OK)
+            if (getImage.ShowDialog() == DialogResult.OK)
             {
+                pictureBox1.ImageLocation = getImage.FileName;
+                txtRuta.Text = getImage.FileName;
+                foto = procesar(getImage.FileName.ToString());
 
-                pictureBox1.Image =
-
-                Image.FromFile(fileDialog.FileName);
+                pictureBox1.Load(foto);
             }
+            else
+            {
+                MessageBox.Show("No ha seleccionado ninguna imagen", "Sin seleccionar", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
 
+        public string procesar(string x)
+        {
+            string[] separators = { "\\" };
+            string[] palabras = x.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            string texto = "";
+            for (int a = 0; a < palabras.Length; a++)
+            {
+                texto += palabras[a];
+                texto += (a < palabras.Length - 1) ? "\\\\" : "";
+            }
+            return texto;
         }
 
         private void cmbcargo_TextChanged(object sender, EventArgs e)
@@ -307,6 +338,27 @@ namespace consulta_nomina
             op.llenarTextBox(txtIdEstado, " select idestado from estado where descriestado='"+ cmbestado.Text +"'", "idestado");
 
         }
+
+        private void txtid_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnimprimir_Click(object sender, EventArgs e)
+        {
+            Operaciones op = new Operaciones();
+            DataSet ds = new DataSet();
+
+
+                     
+                DataTable dt = op.ConsultaConResultado("select * from empleados where idempleado= '"+txtid.Text+ "'");
+
+                ds.Tables.Add(dt);
+                ds.Tables[0].TableName = "empleados";
+                ds.WriteXml(@"C:\sistemas\empleadosolo.xml");
+                frmempleadosolo re = new frmempleadosolo();
+                re.Show();
+            }
     }
     
 }

@@ -33,5 +33,48 @@ namespace consulta_nomina
         {
             Application.Exit ();
         }
+
+        private void cargoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmBusquedaCargo bc = new frmBusquedaCargo();
+            bc.Show();
+        }
+
+        private void cargoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmCargo ca = new frmCargo();
+            ca.Show();
+        }
+
+        private void noToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            busquedaNomina bn = new busquedaNomina();
+            bn.Show();
+        }
+
+        private void nominaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCrudNomina cn = new frmCrudNomina();
+            cn.Show();
+        }
+
+        private void departamentosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDepartamento dp = new frmDepartamento();
+            dp.Show();
+
+        }
+
+        private void departamentoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmbusquedadepartamento bd = new frmbusquedadepartamento();
+            bd.Show();
+        }
+
+        private void departamentoToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            frmbusquedadepartamento bd = new frmbusquedadepartamento();
+            bd.Show();
+        }
     }
 }
